@@ -7,6 +7,6 @@ pub struct Offer {
     pub maker: Pubkey,
     pub mint_a: Pubkey,
     pub mint_b: Pubkey,
-    pub amount: u64,
+    pub wanted_amount: u64,
     pub bump: u8,
 }
