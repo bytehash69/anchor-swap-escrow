@@ -24,7 +24,7 @@ pub mod anchor_swap_escrow {
 
     pub fn take_offer(ctx: Context<TakeOffer>) -> Result<()> {
         ctx.accounts.send_wanted_tokens_to_maker()?;
-        ctx.accounts.withdraw_n_close_vault()?;
+        // ctx.accounts.withdraw_n_close_vault()?;
         Ok(())
     }
 }

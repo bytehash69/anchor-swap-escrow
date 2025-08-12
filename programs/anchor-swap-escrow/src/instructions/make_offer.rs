@@ -4,7 +4,7 @@ use anchor_spl::{
     token_interface::{transfer_checked, Mint, TokenAccount, TokenInterface, TransferChecked},
 };
 
-use crate::Offer;
+use crate::*;
 
 #[derive(Accounts)]
 #[instruction(id: u64)]

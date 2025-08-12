@@ -1,5 +1,5 @@
-pub mod makeOffer;
-pub mod takeOffer;
+pub mod make_offer;
+pub mod take_offer;
 
-pub use makeOffer::*;
-pub use takeOffer::*;
+pub use make_offer::*;
+pub use take_offer::*;

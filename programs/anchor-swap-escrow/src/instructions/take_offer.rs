@@ -5,10 +5,9 @@ use anchor_spl::{
     token_interface::{transfer_checked, Mint, TokenAccount, TokenInterface, TransferChecked},
 };
 
-use crate::Offer;
+use crate::*;
 
 #[derive(Accounts)]
-#[instruction(id: u64)]
 pub struct TakeOffer<'info> {
     #[account(mut)]
     pub taker: Signer<'info>,
@@ -47,7 +46,7 @@ pub struct TakeOffer<'info> {
 
     #[account(
         mut,
-        seeds = [b"offer", maker.key().as_ref(), id.to_le_bytes().as_ref()],
+        seeds = [b"offer", maker.key().as_ref(), offer.id.to_le_bytes().as_ref()],
         bump
     )]
     pub offer: Account<'info, Offer>,
@@ -88,13 +87,6 @@ impl<'info> TakeOffer<'info> {
     }
 
     pub fn withdraw_n_close_vault(&self) -> Result<()> {
-        let signer_seeds: &[&[&[u8]]] = &[&[
-            b"offer",
-            self.maker.key.as_ref(),
-            &self.offer.id.to_le_bytes(),
-            &[self.offer.bump],
-        ]];
-
         let accounts = TransferChecked {
             authority: self.offer.to_account_info(),
             from: self.vault.to_account_info(),
@@ -112,11 +104,7 @@ impl<'info> TakeOffer<'info> {
             destination: self.maker.to_account_info(),
         };
 
-        let cpi_context = CpiContext::new_with_signer(
-            self.token_program.to_account_info(),
-            accounts,
-            &signer_seeds,
-        );
+        let cpi_context = CpiContext::new(self.token_program.to_account_info(), accounts);
 
         close_account(cpi_context)?;
 

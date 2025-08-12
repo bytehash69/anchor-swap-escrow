@@ -120,5 +120,15 @@ describe("anchor-swap-escrow", () => {
     assert(offerAccount.mintA.equals(accounts.mintA));
     assert(offerAccount.mintB.equals(accounts.mintB));
     assert(offerAccount.wantedAmount.eq(tokenBWantedAmount));
-  })
+  }).slow(ANCHOR_SLOW_TEST_THRESHOLD);
+
+  it("Puts the tokens from the vault into Bob's account, and gives Alice Bob's tokens, when Bob takes an offer", async () => {
+    const tx = await program.methods
+      .takeOffer()
+      .accounts({ ...accounts })
+      .signers([bob])
+      .rpc();
+
+      await confirmTransaction(connection, tx);
+  }).slow(ANCHOR_SLOW_TEST_THRESHOLD);
 });
