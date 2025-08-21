@@ -1,6 +1,6 @@
 # ⚓️ Anchor Swap Escrow
 
-A 🦀 Rust & ⚡️ TypeScript-based escrow program for atomic swaps on the Solana blockchain, powered by the [Anchor framework](https://project-serum.github.io/anchor/).
+A Rust & TypeScript-based escrow program for atomic swaps on the Solana blockchain, powered by the [Anchor framework](https://project-serum.github.io/anchor/).
 
 ---
 
@@ -66,20 +66,6 @@ anchor deploy
 
 - The TypeScript client (see `tests/` or `client/`) lets you interact with the program.
 - Example scripts show how to create escrows and execute swaps.
-
----
-
-## 💡 Example: Initiating an Escrow (TypeScript)
-
-```typescript
-import { Program, AnchorProvider, web3 } from "@project-serum/anchor";
-import { AnchorSwapEscrow } from "../target/types/anchor_swap_escrow";
-// ...setup provider and program...
-
-// Call initializeEscrow, exchange, and closeEscrow instructions accordingly
-```
-
-For full examples, check out the `tests/` directory.
 
 ---
 
